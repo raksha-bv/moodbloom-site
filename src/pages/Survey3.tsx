@@ -3,15 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import { MelloButton } from '@/components/MelloButton';
 import { SurveyCard } from '@/components/SurveyCard';
 
-const Survey: React.FC = () => {
+const Survey3: React.FC = () => {
   const navigate = useNavigate();
   const [responses, setResponses] = useState<Record<string, number>>({});
 
   const questions = [
-    "little interest or pleasure in doing things",
-    "feeling down, depressed, irritable or hopeless", 
-    "trouble falling or staying asleep, or sleeping too much",
-    "feeling tired or having little energy"
+    "Repeated, disturbing memories, thoughts, or images of a stressful experience from the past?",
+    "Repeated, disturbing dreams of a stressful experience from the past?",
+    "Suddenly acting or feeling as if a stressful experience were happening again (as if you were reliving it)?",
+    "Feeling very upset when something reminded you of a stressful experience from the past?"
   ];
 
   const handleRatingChange = (questionIndex: number) => (rating: number) => {
@@ -22,8 +22,8 @@ const Survey: React.FC = () => {
   };
 
   const handleNext = () => {
-    console.log('Survey responses:', responses);
-    navigate('/survey2');
+    console.log('Survey 3 responses:', responses);
+    navigate('/survey4');
   };
 
   return (
@@ -71,4 +71,4 @@ const Survey: React.FC = () => {
   );
 };
 
-export default Survey;
+export default Survey3;

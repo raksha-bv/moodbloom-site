@@ -3,15 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import { MelloButton } from '@/components/MelloButton';
 import { SurveyCard } from '@/components/SurveyCard';
 
-const Survey: React.FC = () => {
+const Survey2: React.FC = () => {
   const navigate = useNavigate();
   const [responses, setResponses] = useState<Record<string, number>>({});
 
   const questions = [
-    "little interest or pleasure in doing things",
-    "feeling down, depressed, irritable or hopeless", 
-    "trouble falling or staying asleep, or sleeping too much",
-    "feeling tired or having little energy"
+    "Poor appetite or overeating",
+    "Feeling bad about yourself – or that you are a failure or have let yourself or your family down",
+    "Trouble concentrating on things, such as school work, reading or watching television",
+    "Moving or speaking so slowly that other people could have noticed? Or the opposite – being so fidgety or restless that you have been moving around a lot more than usual"
   ];
 
   const handleRatingChange = (questionIndex: number) => (rating: number) => {
@@ -22,8 +22,8 @@ const Survey: React.FC = () => {
   };
 
   const handleNext = () => {
-    console.log('Survey responses:', responses);
-    navigate('/survey2');
+    console.log('Survey 2 responses:', responses);
+    navigate('/survey3');
   };
 
   return (
@@ -71,4 +71,4 @@ const Survey: React.FC = () => {
   );
 };
 
-export default Survey;
+export default Survey2;
