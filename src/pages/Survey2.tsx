@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MelloButton } from '@/components/MelloButton';
-import { SurveyCard } from '@/components/SurveyCard';
+import { PH8SurveyCard } from '@/components/PH8-SurveyCard';
+import { useDispatch, useSelector } from 'react-redux';
+import { addValues } from '@/redux/arraySlice';
+import { RootState } from '@/redux/store';
 
 const Survey2: React.FC = () => {
   const navigate = useNavigate();
-  const [responses, setResponses] = useState<Record<string, number>>({});
+  const structure = useSelector((state : RootState) => state.structure);
+  const [responses, setResponses] = useState<number[]>([]);
+  const dispatch = useDispatch();
+  
+
 
   const questions = [
     "Poor appetite or overeating",
@@ -15,14 +22,16 @@ const Survey2: React.FC = () => {
   ];
 
   const handleRatingChange = (questionIndex: number) => (rating: number) => {
-    setResponses(prev => ({
-      ...prev,
-      [questionIndex]: rating
-    }));
+    setResponses((prev) => {
+      const newResponses = [...prev];
+      newResponses[questionIndex] = rating;
+      return newResponses;
+    });
   };
 
   const handleNext = () => {
     console.log('Survey 2 responses:', responses);
+    dispatch(addValues(responses))
     navigate('/survey3');
   };
 
@@ -47,7 +56,7 @@ const Survey2: React.FC = () => {
           {/* Survey Cards Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
             {questions.map((question, index) => (
-              <SurveyCard
+              <PH8SurveyCard
                 key={index}
                 question={question}
                 onRatingChange={handleRatingChange(index)}

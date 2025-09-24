@@ -1,9 +1,22 @@
 import React, { useState } from 'react';
 import { MelloButton } from '@/components/MelloButton';
 import { SurveyCard } from '@/components/SurveyCard';
+import { useDispatch, useSelector } from 'react-redux';
+import { addValues } from '@/redux/arraySlice';
+import { RootState } from '@/redux/store';
+import { useNavigate } from 'react-router-dom';
 
 const Survey6: React.FC = () => {
-  const [responses, setResponses] = useState<Record<string, number>>({});
+  const navigate = useNavigate();
+  const [structure, setStructure] = useState<number[]>(
+    useSelector((state: RootState) => state.structure)
+  ); ;
+
+  const [responses, setResponses] = useState<number[]>([]);
+  const dispatch = useDispatch();
+ 
+
+
 
   const questions = [
     "Trouble falling or staying asleep?",
@@ -13,15 +26,23 @@ const Survey6: React.FC = () => {
     "Feeling jumpy or easily startled?"
   ];
 
+
   const handleRatingChange = (questionIndex: number) => (rating: number) => {
-    setResponses(prev => ({
-      ...prev,
-      [questionIndex]: rating
-    }));
+    setResponses((prev) => {
+      const newResponses = [...prev];
+      newResponses[questionIndex] = rating;
+      return newResponses;
+    });
   };
 
   const handleFinish = () => {
-    console.log('Survey 6 responses:', responses);
+    dispatch(addValues(responses));
+
+    
+
+    
+    console.log("Updated Structure:", [...structure, ...responses]);
+    navigate("/chatbot");
     alert('Survey completed! Thank you for your responses.');
   };
 

@@ -12,12 +12,13 @@ const RatingButton: React.FC<RatingButtonProps> = ({ value, isSelected, onClick 
     <button
       onClick={onClick}
       className={cn(
-        'w-12 h-12 rounded-full border-2 transition-all duration-200',
-        'flex items-center justify-center text-sm font-light',
-        'hover:scale-110 active:scale-95',
+        "w-12 h-12 rounded-full border-2",
+        "flex items-center justify-center text-sm font-light",
+        "hover:scale-110 active:scale-95 transition-all duration-400",
         {
-          'border-rating-selected bg-rating-selected text-white': isSelected,
-          'border-rating-border bg-rating-bg text-text-primary hover:border-rating-selected/50': !isSelected,
+          "border-rating-selected bg-rating-selected text-white": isSelected,
+          "border-rating-border bg-rating-bg text-text-primary hover:border-rating-selected/50":
+            !isSelected,
         }
       )}
     >
