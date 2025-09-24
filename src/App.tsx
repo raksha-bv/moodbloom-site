@@ -12,6 +12,9 @@ import Survey4 from "./pages/Survey4";
 import Survey5 from "./pages/Survey5";
 import Survey6 from "./pages/Survey6";
 import NotFound from "./pages/NotFound";
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
+import Chatbot from "./pages/Chatbot";
 
 const queryClient = new QueryClient();
 
@@ -20,20 +23,23 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/form" element={<Form />} />
-          <Route path="/survey" element={<Survey />} />
-          <Route path="/survey2" element={<Survey2 />} />
-          <Route path="/survey3" element={<Survey3 />} />
-          <Route path="/survey4" element={<Survey4 />} />
-          <Route path="/survey5" element={<Survey5 />} />
-          <Route path="/survey6" element={<Survey6 />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Landing />} />
+            <Route path="/form" element={<Form />} />
+            <Route path="/survey" element={<Survey />} />
+            <Route path="/survey2" element={<Survey2 />} />
+            <Route path="/survey3" element={<Survey3 />} />
+            <Route path="/survey4" element={<Survey4 />} />
+            <Route path="/survey5" element={<Survey5 />} />
+            <Route path="/survey6" element={<Survey6 />} />
+            <Route path="/chatbot" element={<Chatbot />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </Provider>
     </TooltipProvider>
   </QueryClientProvider>
 );

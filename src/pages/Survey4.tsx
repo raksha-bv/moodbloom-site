@@ -2,10 +2,16 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MelloButton } from '@/components/MelloButton';
 import { SurveyCard } from '@/components/SurveyCard';
+import { addValues } from '@/redux/arraySlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
 
 const Survey4: React.FC = () => {
   const navigate = useNavigate();
-  const [responses, setResponses] = useState<Record<string, number>>({});
+  const structure = useSelector((state : RootState) => state.structure);
+  const [responses, setResponses] = useState<number[]>([]);
+  const dispatch = useDispatch();
+
 
   const questions = [
     "Having physical reactions (e.g., heart pounding, trouble breathing, or sweating) when something reminded you of a stressful experience from the past?",
@@ -15,14 +21,16 @@ const Survey4: React.FC = () => {
   ];
 
   const handleRatingChange = (questionIndex: number) => (rating: number) => {
-    setResponses(prev => ({
-      ...prev,
-      [questionIndex]: rating
-    }));
+    setResponses((prev) => {
+      const newResponses = [...prev];
+      newResponses[questionIndex] = rating;
+      return newResponses;
+    });
   };
-
+    
   const handleNext = () => {
     console.log('Survey 4 responses:', responses);
+    dispatch(addValues(responses))
     navigate('/survey5');
   };
 

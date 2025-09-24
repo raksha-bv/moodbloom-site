@@ -2,10 +2,16 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MelloButton } from '@/components/MelloButton';
 import { SurveyCard } from '@/components/SurveyCard';
+import { useDispatch, useSelector } from 'react-redux';
+import { addValues } from '@/redux/arraySlice';
+import { RootState } from '@/redux/store';
 
 const Survey5: React.FC = () => {
   const navigate = useNavigate();
-  const [responses, setResponses] = useState<Record<string, number>>({});
+  const structure = useSelector((state : RootState) => state.structure);
+  const [responses, setResponses] = useState<number[]>([]);
+  const dispatch = useDispatch();
+
 
   const questions = [
     "Loss of interest in things that you used to enjoy?",
@@ -15,14 +21,16 @@ const Survey5: React.FC = () => {
   ];
 
   const handleRatingChange = (questionIndex: number) => (rating: number) => {
-    setResponses(prev => ({
-      ...prev,
-      [questionIndex]: rating
-    }));
+    setResponses((prev) => {
+      const newResponses = [...prev];
+      newResponses[questionIndex] = rating;
+      return newResponses;
+    });
   };
 
   const handleNext = () => {
     console.log('Survey 5 responses:', responses);
+    dispatch(addValues(responses));
     navigate('/survey6');
   };
 
