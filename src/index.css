@@ -2,14 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Mello Mental Health App Design System */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap');
 
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 0 0% 20%;
+    
+    /* Gradient colors for the beautiful pink-orange background */
+    --gradient-start: 330 100% 85%;
+    --gradient-mid: 350 100% 80%;
+    --gradient-end: 25 100% 75%;
+    
+    /* Card and form backgrounds with glass effect */
+    --card-bg: 0 0% 100%;
+    --card-border: 0 0% 90%;
+    --form-bg: 0 0% 98%;
+    
+    /* Text colors */
+    --text-primary: 0 0% 25%;
+    --text-secondary: 0 0% 50%;
+    --text-muted: 0 0% 60%;
+    
+    /* Button colors */
+    --button-primary: 330 100% 85%;
+    --button-hover: 340 100% 80%;
+    
+    /* Input styling */
+    --input-bg: 0 0% 100%;
+    --input-border: 0 0% 85%;
+    --input-focus: 330 100% 85%;
+    
+    /* Rating circles */
+    --rating-bg: 0 0% 95%;
+    --rating-border: 0 0% 80%;
+    --rating-selected: 330 100% 85%;
+    
+    --radius: 1rem;
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -92,6 +122,32 @@ All colors MUST be HSL.
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+  
+  /* Gradient background components */
+  .gradient-background {
+    background: linear-gradient(135deg, 
+      hsl(var(--gradient-start)) 0%, 
+      hsl(var(--gradient-mid)) 50%, 
+      hsl(var(--gradient-end)) 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+  }
+  
+  .gradient-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 70%;
+    height: 100vh;
+    background: linear-gradient(135deg, 
+      hsl(var(--gradient-start) / 0.8) 0%, 
+      hsl(var(--gradient-mid) / 0.6) 50%, 
+      hsl(var(--gradient-end) / 0.8) 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 20s ease infinite;
+    filter: blur(120px);
+    z-index: -1;
+  }
 }
 
 @layer base {
@@ -100,6 +156,19 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-light;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+}
+
+@layer utilities {
+  /* Custom animations */
+  @keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  
+  .animate-gradient {
+    animation: gradientShift 15s ease infinite;
   }
 }

@@ -19,6 +19,31 @@ export default {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        
+        // Custom Mello colors
+        "text-primary": "hsl(var(--text-primary))",
+        "text-secondary": "hsl(var(--text-secondary))",
+        "text-muted": "hsl(var(--text-muted))",
+        
+        "card-bg": "hsl(var(--card-bg))",
+        "card-border": "hsl(var(--card-border))",
+        "form-bg": "hsl(var(--form-bg))",
+        
+        "button-primary": "hsl(var(--button-primary))",
+        "button-hover": "hsl(var(--button-hover))",
+        
+        "input-bg": "hsl(var(--input-bg))",
+        "input-border": "hsl(var(--input-border))",
+        "input-focus": "hsl(var(--input-focus))",
+        
+        "rating-bg": "hsl(var(--rating-bg))",
+        "rating-border": "hsl(var(--rating-border))",
+        "rating-selected": "hsl(var(--rating-selected))",
+        
+        "gradient-start": "hsl(var(--gradient-start))",
+        "gradient-mid": "hsl(var(--gradient-mid))",
+        "gradient-end": "hsl(var(--gradient-end))",
+        
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
