@@ -1,31 +1,25 @@
-import React, { useState } from 'react';
-import { MelloButton } from '@/components/MelloButton';
-import { SurveyCard } from '@/components/SurveyCard';
-import { useDispatch, useSelector } from 'react-redux';
-import { addValues } from '@/redux/arraySlice';
-import { RootState } from '@/redux/store';
-import { useNavigate } from 'react-router-dom';
+// Survey6.tsx (updated)
+import React, { useState } from "react";
+import { MelloButton } from "@/components/MelloButton";
+import { SurveyCard } from "@/components/SurveyCard";
+import { useDispatch, useSelector } from "react-redux";
+import { addValues } from "@/redux/arraySlice";
+import { RootState } from "@/redux/store";
+import { useNavigate } from "react-router-dom";
 
 const Survey6: React.FC = () => {
   const navigate = useNavigate();
-  const [structure, setStructure] = useState<number[]>(
-    useSelector((state: RootState) => state.structure)
-  ); ;
-
+  const structure = useSelector((state: RootState) => state.structure);
   const [responses, setResponses] = useState<number[]>([]);
   const dispatch = useDispatch();
- 
-
-
 
   const questions = [
     "Trouble falling or staying asleep?",
     "Feeling irritable or having angry outbursts?",
     "Having difficulty concentrating?",
-    "Being \"super alert\" or watchful on guard?",
-    "Feeling jumpy or easily startled?"
+    'Being "super alert" or watchful on guard?',
+    "Feeling jumpy or easily startled?",
   ];
-
 
   const handleRatingChange = (questionIndex: number) => (rating: number) => {
     setResponses((prev) => {
@@ -36,37 +30,33 @@ const Survey6: React.FC = () => {
   };
 
   const handleFinish = () => {
+    // Ensure all 5 questions are answered
+    if (responses.length < 5 || responses.some((r) => r === undefined)) {
+      alert("Please answer all questions before proceeding.");
+      return;
+    }
+
     dispatch(addValues(responses));
-
-    
-
-    
-    console.log("Updated Structure:", [...structure, ...responses]);
-    navigate("/chatbot");
-    alert('Survey completed! Thank you for your responses.');
+    console.log("Final Structure:", [...structure, ...responses]);
+    navigate("/chatbot"); // Navigate to chatbot instead of results
   };
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
-      {/* Gradient overlay background */}
       <div className="gradient-overlay" />
-      
-      {/* Main content */}
+
       <div className="relative z-10 min-h-screen py-12 px-8">
         <div className="max-w-6xl mx-auto">
-          {/* Header */}
           <div className="text-center max-w-4xl mx-auto mb-16">
             <h1 className="text-3xl lg:text-4xl font-light text-text-primary mb-4 leading-tight">
-              last part of the questionnaire
+              Last part of the questionnaire
             </h1>
             <p className="text-text-secondary font-light text-lg">
               1 = least / 5 = most
             </p>
           </div>
-          
-          {/* Survey Cards Grid - 5 cards in a special layout */}
+
           <div className="space-y-8 mb-16">
-            {/* First row - 2 cards */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <SurveyCard
                 question={questions[0]}
@@ -77,8 +67,7 @@ const Survey6: React.FC = () => {
                 onRatingChange={handleRatingChange(1)}
               />
             </div>
-            
-            {/* Second row - 2 cards */}
+
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <SurveyCard
                 question={questions[2]}
@@ -89,8 +78,7 @@ const Survey6: React.FC = () => {
                 onRatingChange={handleRatingChange(3)}
               />
             </div>
-            
-            {/* Third row - 1 card centered */}
+
             <div className="flex justify-center">
               <div className="w-full max-w-md lg:max-w-lg">
                 <SurveyCard
@@ -100,13 +88,13 @@ const Survey6: React.FC = () => {
               </div>
             </div>
           </div>
-          
-          {/* Finish Button */}
+
           <div className="flex justify-end">
             <MelloButton
               onClick={handleFinish}
               size="lg"
               className="text-base px-10"
+              disabled={responses.length < 5}
             >
               finish
             </MelloButton>
