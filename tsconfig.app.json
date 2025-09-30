@@ -7,12 +7,13 @@
     "skipLibCheck": true,
 
     /* Bundler mode */
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
+    "jsxImportSource": "react",
 
     /* Linting */
     "strict": false,
@@ -21,6 +22,7 @@
     "noImplicitAny": false,
     "noFallthroughCasesInSwitch": false,
 
+    /* Aliases */
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]

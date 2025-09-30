@@ -86,8 +86,6 @@ export default function Chatbot() {
                   <br />
                   <strong>Prediction:</strong> {result.prediction}
                   <br />
-                  <strong>Confidence:</strong>{" "}
-                  {(result.probability * 100).toFixed(1)}%
                 </p>
               </div>
             </div>
