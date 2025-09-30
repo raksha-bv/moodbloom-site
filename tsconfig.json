@@ -1,13 +1,29 @@
 {
-  "extends": "../tsconfig.json",
   "compilerOptions": {
-    "jsx": "react-jsx", // ✅ enables new JSX transform
-    "jsxImportSource": "react", // optional, ensures SWC knows where to import from
-    "moduleResolution": "bundler",
-    "isolatedModules": true,
-    "target": "ESNext",
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"]
+    "skipLibCheck": true,
+
+    "moduleResolution": "node",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+
+    "strict": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noImplicitAny": false,
+    "noFallthroughCasesInSwitch": false,
+
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
   "include": ["src"]
 }
